@@ -3,256 +3,107 @@ package com.example.mvvmcalculator
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.mvvmcalculator.ui.theme.*
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mvvmcalculator.theme.spacing
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MVVMCalculatorTheme {
-
-
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(
-                                brush = Brush.linearGradient(
-                                    colors = listOf(
-                                        backroundcolor,
-                                        backroundcolor2
-                                    )
-                                )
-                            )
-
-                    ) {
-
-                        Column (verticalArrangement = Arrangement.Bottom,
-                            modifier = Modifier
-                                .fillMaxSize())
-                        {
-                            Spacer(modifier = Modifier.padding(80.dp))
-                            Row(verticalAlignment = Alignment.Top,
-                                horizontalArrangement  =  Arrangement.End, modifier = Modifier.fillMaxWidth()) {
-                                Text(text = "941", color = Color.White, fontFamily = sfpro, fontSize = 112.sp)
-
-                            }
-                            Row(horizontalArrangement = Arrangement.SpaceBetween,modifier = Modifier
-                                .padding(16.dp, 4.dp)
-                                .fillMaxWidth()) {
-                                Button(modifier = Modifier
-
-                                    .clip(CircleShape)
-                                    .size(80.dp) ,onClick = { /*TODO*/ }) {
-                                    Text(text = "AC", color = Color.White, fontFamily = sfpro, fontSize = 34.sp)
-
-                                }
-                                Button(modifier = Modifier
-                                    .clip(CircleShape)
-                                    .size(80.dp) ,onClick = { /*TODO*/ }) {
-                                    Icon(painter = painterResource(R.drawable.ic_android_black_24dp), contentDescription = "", tint = Color.White)
-
-                                }
-                                Button(modifier = Modifier
-                                    .clip(CircleShape)
-                                    .size(80.dp) ,onClick = { /*TODO*/ }) {
-                                    Icon(painter = painterResource(R.drawable.ic_percent), tint = Color.White, contentDescription ="" )
-
-
-                                }
-                                GradientButtonDivision(
-
-
-                                    text = "÷",
-                                    textColor = Color.White,
-                                    gradient = Brush.linearGradient(colors = listOf(orange2, orange)),onClick = { }
-
-                                )
-
-                            }
-                            Row(horizontalArrangement = Arrangement.SpaceBetween,modifier = Modifier
-                                .padding(16.dp, 4.dp)
-                                .fillMaxWidth()) {
-
-                                GradientButtonNumber(
-
-
-                                    text = "7",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButtonNumber(
-
-
-                                    text = "8",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButtonNumber(
-
-
-                                    text = "9",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButton(
-
-
-                                    text = "÷",
-                                    textColor = Color.White,
-                                    gradient = Brush.linearGradient(colors = listOf(orange2, orange)),onClick = { }
-
-                                )
-
-                            }
-                            Row(horizontalArrangement = Arrangement.SpaceBetween,modifier = Modifier
-                                .padding(16.dp, 4.dp)
-                                .fillMaxWidth()) {
-                                GradientButtonNumber(
-
-
-                                    text = "4",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButtonNumber(
-
-
-                                    text = "5",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButtonNumber(
-
-
-                                    text = "6",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButtonMinus(
-                                    text = "-",
-                                    textColor = Color.White,
-                                    gradient = Brush.linearGradient(colors = listOf(orange2, orange)),onClick = { }
-
-                                )
-
-                            }
-                            Row(horizontalArrangement = Arrangement.SpaceBetween,modifier = Modifier
-                                .padding(16.dp, 4.dp)
-                                .fillMaxWidth()) {
-                                GradientButtonNumber(
-
-
-                                    text = "1",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButtonNumber(
-
-
-                                    text = "2",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButtonNumber(
-
-
-                                    text = "3",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButtonPlus(
-                                    text = "+",
-                                    textColor = Color.White,
-                                    gradient = Brush.linearGradient(colors = listOf(orange2, orange)),onClick = { }
-
-                                )
-
-
-
-                            }
-                            Row(horizontalArrangement = Arrangement.SpaceBetween,modifier = Modifier
-                                .padding(16.dp, 8.dp, 16.dp, 70.dp)
-                                .fillMaxWidth()) {
-                                GradientButtonNumberWide(
-
-
-                                    text = "0",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-                                GradientButtonNumber(
-
-
-                                    text = ",",
-                                    textColor = Color.Black,
-                                    gradient = Brush.linearGradient(colors = listOf(whitebutton,
-                                        whitebutton2)),onClick = { }
-
-                                )
-
-                                GradientButtonEqual(
-
-
-                                    text = "=",
-                                    textColor = Color.White,
-                                    gradient = Brush.linearGradient(colors = listOf(orange2, orange)),onClick = { }
-
-                                )
-
-                            }
-
-
-                        }
-
-                    }
-
+            CalculatorTheme {
+                val viewModel = viewModel<CalcViewModel>()
+                val state =
+                    viewModel.viewState.collectAsState(initial = CalcViewModel.ViewState("0")).value
+                CalcScreen(state) {
+                    viewModel.dispatch(it)
                 }
-
-
             }
         }
     }
-
 }
 
+@Composable
+private fun CalcScreen(state: CalcViewModel.ViewState, dispatcher: (ActionType) -> Unit) {
+    Surface(
+        color = MaterialTheme.colors.background,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Box(
+            modifier = Modifier
+                .padding(horizontal = MaterialTheme.spacing.lg, vertical = MaterialTheme.spacing.sm)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter),
+            ) {
+                InputDisplayComponent(state)
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.lg))
+                CalcButtonsGridLayout(dispatcher)
+            }
+        }
+    }
+}
+
+@Composable
+private fun CalcButtonsGridLayout(dispatcher: (ActionType) -> Unit) {
+    val buttons = listOf(
+        ActionType.Clear,
+        ActionType.Operator(Operators.Power),
+        ActionType.Percentage,
+        ActionType.Operator(Operators.Divide),
+        ActionType.Number(7),
+        ActionType.Number(8),
+        ActionType.Number(9),
+        ActionType.Operator(Operators.Multiply),
+        ActionType.Number(4),
+        ActionType.Number(5),
+        ActionType.Number(6),
+        ActionType.Operator(Operators.Subtract),
+        ActionType.Number(3),
+        ActionType.Number(2),
+        ActionType.Number(1),
+        ActionType.Operator(Operators.Add),
+        ActionType.Number(0),
+        ActionType.Decimal,
+        ActionType.Delete,
+        ActionType.Calculate,
+    )
+
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(4),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm),
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm),
+        content = {
+            items(buttons) {
+                CalcButtonComponent(
+                    modifier = Modifier.aspectRatio(1f),
+                    color = it.buttonColor,
+                    symbol = it.symbol
+                ) {
+                    dispatcher(it)
+                }
+            }
+        })
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun CalcScreenPreview() {
+    CalculatorTheme {
+        CalcScreen(CalcViewModel.ViewState("0")) {}
+    }
+}
